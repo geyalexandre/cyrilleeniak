@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from pytube import YouTube
 import time
+import setproctitle
 
 client = commands.Bot(command_prefix="!")
 musicQueue = []
@@ -96,4 +97,5 @@ async def test(ctx):
     except:
         print("Connection Error")  # to handle exception
 
+setproctitle.setproctitle('cyril-lee-niak')
 client.run('OTU1MTc0NjYzMTM3NDA3MDI2.Yjd1uQ.Mj6jsjEQyOAInjXSfWcw2wXJzOA')
