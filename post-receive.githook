@@ -17,4 +17,6 @@ sed -i 's/##DISCORD_TOKEN##/##NEW_DISCORD_TOKEN##/g' bot.py
 
 echo 'post-receive: launching cyril-lee-niak...'
 nohup python3 bot.py > log.txt &
- 
+
+echo 'post-receive: cyril-lee-niak SATELLISÉ'
+exit

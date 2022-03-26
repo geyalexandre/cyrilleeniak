@@ -32,7 +32,6 @@ async def play(ctx, url : str):
         voice.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=path.split("/")[-1]))
 
 
-@client.command()
 async def join(ctx):
     if not ctx.message.author.voice:
         await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
