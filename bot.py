@@ -3,6 +3,8 @@ import setproctitle
 from discord.ext import commands
 from pytube import YouTube
 
+musicQueue = []
+client = commands.Bot(command_prefix="!")
 
 @client.command()
 async def queue(ctx, entry):
@@ -23,10 +25,10 @@ async def play(ctx, url : str):
         await join(ctx)
         voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
 
-    video = YouTube(url)
-    audio = video.streams.filter(only_audio=True, file_extension='mp4').first()
-    path = audio.download()
     if not voice.is_playing():
+        video = YouTube(url)
+        audio = video.streams.filter(only_audio=True, file_extension='mp4').first()
+        path = audio.download(filename='music.mp4')
         voice.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=path.split("/")[-1]))
 
 
@@ -71,8 +73,5 @@ async def stop(ctx):
 #######################
 ######## MAIN #########
 #######################
-musicQueue = []
-client = commands.Bot(command_prefix="!")
-
 setproctitle.setproctitle('cyril-lee-niak')
 client.run('OTU1MTc0NjYzMTM3NDA3MDI2.Yjd1uQ.Mj6jsjEQyOAInjXSfWcw2wXJzOA')
