@@ -1,15 +1,11 @@
 import discord
+import setproctitle
 from discord.ext import commands
 from pytube import YouTube
-import time
-import setproctitle
 
-client = commands.Bot(command_prefix="!")
-musicQueue = []
 
 @client.command()
 async def queue(ctx, entry):
-    print("Queuing ", entry)
     ctx.send("Queuing {}".format(entry))
     musicQueue.append(entry)
 
@@ -27,19 +23,12 @@ async def play(ctx, url : str):
         await join(ctx)
         voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
 
-    ##try:
     video = YouTube(url)
-    print(video.streams.filter(only_audio=True))
-    # filtering the audio. File extension can be mp4/webm
-    # You can see all the available streams by print(video.streams)
     audio = video.streams.filter(only_audio=True, file_extension='mp4').first()
     path = audio.download()
-    print('Download Completed!')
     if not voice.is_playing():
-        voice.play(discord.FFmpegPCMAudio(executable="C:/Users/Alexandre/Desktop/ffmpeg-master-latest-win64-gpl-shared/ffmpeg-master-latest-win64-gpl-shared/bin/ffmpeg.exe", source=path.split("/")[-1]))
+        voice.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=path.split("/")[-1]))
 
-    ##except:
-      ##  print("Connection Error")  # to handle exception
 
 @client.command()
 async def join(ctx):
@@ -79,23 +68,11 @@ async def stop(ctx):
     voice = discord.utils.get(client.voice_clients, guild=ctx.guild)
     voice.stop()
 
-@client.command()
-async def test(ctx):
-    destination = "./"
-    # link of the video to be downloaded
-    # Replace with the Youtube video link you want to download.
-    video_link = "https://www.youtube.com/watch?v=xWOoBJUqlbI"
-
-    try:
-        video = YouTube(video_link)
-        # filtering the audio. File extension can be mp4/webm
-        # You can see all the available streams by print(video.streams)
-        audio = video.streams.filter(only_audio=True, file_extension='mp4').first()
-        print(audio.download())
-        print('Download Completed!')
-
-    except:
-        print("Connection Error")  # to handle exception
+#######################
+######## MAIN #########
+#######################
+musicQueue = []
+client = commands.Bot(command_prefix="!")
 
 setproctitle.setproctitle('cyril-lee-niak')
 client.run('OTU1MTc0NjYzMTM3NDA3MDI2.Yjd1uQ.Mj6jsjEQyOAInjXSfWcw2wXJzOA')

@@ -1,3 +1,6 @@
 discord~=1.7.3
 pytube~=12.0.0
 setproctitle~=1.2.2
+pynacl~=1.5.0
+
+# Ne pas oublier d'installer ffmpeg en plus sur le serveur : sudo apt-get install ffmpeg
