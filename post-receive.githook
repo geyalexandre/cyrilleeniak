@@ -12,6 +12,9 @@ python3 -m pip install -r requirements.txt
 echo 'post-receive: kill old process...'
 pkill cyril-lee-niak
 
+echo 'post-receive: replace discord token...'
+sed -i 's/##DISCORD_TOKEN##/##NEW_DISCORD_TOKEN##/g' bot.py
+
 echo 'post-receive: launching cyril-lee-niak...'
 nohup python3 bot.py > log.txt &
  

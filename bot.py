@@ -74,4 +74,4 @@ async def stop(ctx):
 ######## MAIN #########
 #######################
 setproctitle.setproctitle('cyril-lee-niak')
-client.run('OTU1MTc0NjYzMTM3NDA3MDI2.Yjd1uQ.Mj6jsjEQyOAInjXSfWcw2wXJzOA')
+client.run('##DISCORD_TOKEN##')
