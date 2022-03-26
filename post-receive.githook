@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo 'post-receive: Triggered.’
+cd /opt/live/cyrilleeniak
+
+echo 'post-receive: git check out...’
+git --git-dir=/opt/cyrilleeniak.git --work-tree=/opt/live/cyrilleeniak checkout master -f
+
+echo 'post-receive: pip install...’
+python3 -m pip install -r requirements.txt
+
+echo 'post-receive: kill old process...'
+pkill cyril-lee-niak
+
+echo 'post-receive: launching cyril-lee-niak...'
+nohup python3 bot.py > log.txt &
+ 
